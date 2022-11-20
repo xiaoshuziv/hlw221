@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="apple-touch-icon" href="icon.jpeg">
+  <meta name="theme-color" content="#fff">
+  <meta name="viewport"
+    content="viewport-fit=cover, user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <title>杭州市扫码通行</title>
+  <style type="text/css">
+    @media (max-width: 375px) {}
+
+    @media (min-width: 375px) and (max-width: 375px) {}
+
+    body {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+
+    }
+  </style>
+</head>
+
+<body style="margin: inherit; font-family: system-ui;">
+  <div class="wrap" style="position:relative;width:375px;height: 100%">
+    <div>
+      <img src="bar.png" style="z-index: 999;width: 100%;position: fixed">
+      <div style="z-index: 10">
+        <p style="margin: inherit">
+          <img src="base.png" style="width: 100%">
+        </p>
+      </div>
+      <div
+        style="z-index: 999; position: absolute; top: 15.8%; left:10%;text-align: left; width: 100%; font-weight: 500;">
+        <p id="pname">
+          张*龙
+        </p>
+      </div>
+      <div style="z-index: 999; position: absolute; top: 18.5%;text-align: center; width: 100%; font-weight: 600;">
+        <p id="location">
+          青山湖科技城站
+        </p>
+      </div>
+      <div style="position: absolute; top: 6.5%; left: 0%; height: 10%;width: 100%; z-index: 20">
+        <div id="test1" style="font-weight: 600;color:#FFFFFF;font-size: 46px;text-align:center;z-index: 21">
+        </div>
+        <div id="test" style="color:#FFFFFF;font-size:17;text-align:center;z-index: 20"></div>
+      </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        const locname = new URLSearchParams(window.location.search).get('pn');
+        const pname = new URLSearchParams(window.location.search).get('na');
+        if (locname) {
+          document.getElementById('location').innerText = locname
+        }
+
+        if (pname) {
+          document.getElementById('pname').innerHTML = pname
+        }
+
+        var getTime = function () {
+          var date = new Date();
+          var year = date.getFullYear();
+          var mon = date.getMonth() + 1;
+          var da = date.getDate();
+          var h = date.getHours();
+          var m = date.getMinutes();
+          var s = date.getSeconds();
+          const d = date.getDay();
+          const dayString = "日一二三四五六"[d]
+          if (da < 10) { da = "0" + da; }
+          if (h < 10) { h = "0" + h; }
+          if (m < 10) { m = "0" + m; }
+          if (s < 10) { s = "0" + s; }
+          document.getElementById('test').innerHTML = mon + "月" + da + "日 " + "星期" + dayString
+          document.getElementById('test1').innerHTML = h + ":" + m + ":" + s
+        }
+        getTime();
+        setInterval(() => {
+          getTime()
+        }, 1000);
+      };
+    </script>
+
+  </div>
+</body>
+
+</html>
